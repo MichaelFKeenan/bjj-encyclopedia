@@ -16,7 +16,7 @@
       <input type="text" v-model="newResultName" />
       <label for="newResultDescription">Description</label>
       <input type="text" v-model="newResultDescription" />
-      <button @click="addResult({ id: results.length + 1, name: newResult })">
+      <button @click="addResult({ name: newResultName, description: newResultDescription })">
         Add
       </button>
     </div>

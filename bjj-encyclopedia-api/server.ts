@@ -2,13 +2,11 @@ import express from "express";
 import { Sequelize, Model, DataTypes } from "sequelize";
 import cors from "cors";
 
-const sequelize = new Sequelize("bjj-encyclopedia", "postgres", "hwaaw599", {
+const sequelize = new Sequelize("postgres", "postgres", "hwaaw599", {
   host: "bjj-encyclopedia.c1wqs44ma0m2.eu-west-2.rds.amazonaws.com",
   port: 5432,
   dialect: "postgres",
-  dialectOptions: {
-    ssl: "Amazon RDS",
-  },
+  ssl: false
 });
 // const sequelize = new Sequelize('postgres://postgres:hwaaw599@bjj-encyclopedia.c1wqs44ma0m2.eu-west-2.rds.amazonaws.com:5432/bjj-encyclopedia')
 
@@ -24,7 +22,7 @@ class Result extends Model {
 Result.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.UUID,
       autoIncrement: true,
       primaryKey: true,
     },
@@ -38,7 +36,7 @@ Result.init(
     },
   },
   {
-    tableName: "results",
+    tableName: "Results",
     sequelize: sequelize,
   }
 );
