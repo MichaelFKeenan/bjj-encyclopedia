@@ -1,7 +1,5 @@
 <template>
   <div>
-    <h1>BJJ! ({{ results.length }})</h1>
-
     <ul>
       <li v-for="result in results" :key="result.id">
         {{ result.name }} - {{ result.description }}
