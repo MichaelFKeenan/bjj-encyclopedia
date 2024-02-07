@@ -1,16 +1,14 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../database';
 
-export class Result extends Model {
+export class Coach extends Model {
   public id!: any;
   public name!: string;
-  public description?: string;
-
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
 
-Result.init({
+Coach.init({
   id: {
     type: DataTypes.UUID,
     autoIncrement: true,
@@ -19,14 +17,10 @@ Result.init({
   name: {
     type: new DataTypes.STRING(128),
     allowNull: false,
-  },
-  description: {
-    type: new DataTypes.STRING(128),
-    allowNull: true,
   }
 }, {
-  tableName: 'Results',
+  tableName: 'Coaches',
   sequelize: sequelize, // this bit is important
 });
 
-export default Result;
+export default Coach;

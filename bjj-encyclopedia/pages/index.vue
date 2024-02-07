@@ -12,11 +12,23 @@
 
     <div class="result-form">
       <h2>Add a result</h2>
-      <label for="newResultName">Name</label>
-      <input type="text" v-model="newResultName" />
-      <label for="newResultDescription">Description</label>
-      <input type="text" v-model="newResultDescription" />
-      <button @click="addResult({ name: newResultName, description: newResultDescription })">
+      <div>
+        <p><label for="newResultName">Name</label></p>
+        <input type="text" v-model="newResultName" />
+      </div>
+      <div>
+        <p><label for="newResultDescription">Description</label></p>
+        <textarea
+          class="result-form__description-input"
+          type="text"
+          v-model="newResultDescription"
+        />
+      </div>
+      <button
+        @click="
+          addResult({ name: newResultName, description: newResultDescription })
+        "
+      >
         Add
       </button>
     </div>
@@ -61,10 +73,19 @@ const updateResult = async (result) => {
   });
 };
 
-const deleteResult = async (result) => {
-  await fetch(`http://localhost:3001/results/${result.id}`, {
+const deleteResult = async (resultId) => {
+  await fetch(`http://localhost:3001/results/${resultId}`, {
     method: "DELETE",
   });
-  results.value = results.value.filter((r) => r.id !== result.id);
+  results.value = results.value.filter((r) => r.id !== resultId);
 };
 </script>
+
+<style scoped lang="scss">
+.result-form {
+  &__description-input {
+    min-height: 250px;
+    min-width: 250px;
+  }
+}
+</style>
