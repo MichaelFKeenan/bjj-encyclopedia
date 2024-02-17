@@ -1,12 +1,8 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../database';
+import Result from './Result';
 
-export class Coach extends Model {
-  public id!: any;
-  public name!: string;
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
-}
+export class Coach extends Model {}
 
 Coach.init({
   id: {
@@ -17,9 +13,9 @@ Coach.init({
   name: {
     type: new DataTypes.STRING(128),
     allowNull: false,
-  }
+  },
 }, {
-  tableName: 'Coaches',
+  modelName: 'Coaches',
   sequelize: sequelize, // this bit is important
 });
 

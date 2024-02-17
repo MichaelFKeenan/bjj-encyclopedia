@@ -1,16 +1,9 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../database';
+import {Category} from './Category';
+import {Coach} from './Coach';
 
-export class Result extends Model {
-  public id!: any;
-  public name!: string;
-  public description?: string;
-  public coach!: any;
-  public category!: any;
-
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
-}
+export class Result extends Model {}
 
 Result.init({
   id: {
@@ -26,17 +19,24 @@ Result.init({
     type: new DataTypes.STRING(128),
     allowNull: true,
   },
-  coach: {
+  CoachId: {
     type: new DataTypes.UUID,
     allowNull: true,
+
   },
-  category: {
+  CategoryId: {
     type: new DataTypes.UUID,
     allowNull: true,
   }
 }, {
-  tableName: 'Results',
+  modelName: 'Results',
   sequelize: sequelize, // this bit is important
 });
+
+(Result as any).categoryId = Result.belongsTo(Category);
+Category.hasMany(Result);
+
+(Result as any).coachId = Result.belongsTo(Coach);
+Coach.hasMany(Result);
 
 export default Result;

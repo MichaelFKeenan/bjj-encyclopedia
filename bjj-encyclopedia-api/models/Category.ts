@@ -1,12 +1,8 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../database';
+import Result from './Result';
 
-export class Category extends Model {
-  public id!: any;
-  public name!: string;
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
-}
+export class Category extends Model {}
 
 Category.init({
   id: {
@@ -19,8 +15,9 @@ Category.init({
     allowNull: false,
   }
 }, {
-  tableName: 'Categories',
+  modelName: 'Categories',
   sequelize: sequelize, // this bit is important
 });
+
 
 export default Category;
