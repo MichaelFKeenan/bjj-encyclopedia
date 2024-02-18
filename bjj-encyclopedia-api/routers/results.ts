@@ -10,6 +10,22 @@ router.get("/results", async (req, res) => {
   const resultsWithCoachAndCategory = await Result.findAll({
     include: [Coach, Category],
   });
+  res.json(resultsWithCoachAndCategory);
+});
+
+router.get("/results/:id", async (req, res) => {
+  const resultWithCoachAndCategory = await Result.findByPk(req.params.id, {include: [Coach, Category]});
+  if (resultWithCoachAndCategory) {
+    res.json(resultWithCoachAndCategory);
+  } else {
+    res.status(404).json({ error: "Result not found" });
+  }
+});
+
+router.get("/results", async (req, res) => {
+  const resultsWithCoachAndCategory = await Result.findAll({
+    include: [Coach, Category],
+  });
   // // const results = await Result.findAll();
   res.json(resultsWithCoachAndCategory);
 });
