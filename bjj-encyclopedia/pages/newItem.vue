@@ -74,16 +74,6 @@
         navigateTo('/login')
     }
   };
-  
-//   const updateResult = async (result) => {
-//     await fetch(`http://localhost:3001/results/${result.id}`, {
-//       method: "PUT",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(result),
-//     });
-//   };
   </script>
   
   <style scoped lang="scss">
