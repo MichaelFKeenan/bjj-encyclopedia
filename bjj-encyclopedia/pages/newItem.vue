@@ -45,12 +45,14 @@
   const coaches = ref([]);
   const categories = ref([]);
   
+  const apiUrl = process.env.API_ENDPOINT || "http://localhost:3001";
+
   const getCoaches = async () => {
-    const response = await fetch("http://localhost:3001/coaches");
+    const response = await fetch(`${apiUrl}/coaches`);
     coaches.value = await response.json();
   };
   const getCategories = async () => {
-    const response = await fetch("http://localhost:3001/categories");
+    const response = await fetch(`${apiUrl}/categories`);
     categories.value = await response.json();
   };
 
@@ -58,7 +60,7 @@
   onMounted(getCategories);
   
   const addResult = async () => {
-    const response = await fetch("http://localhost:3001/results", {
+    const response = await fetch(`${apiUrl}/results`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

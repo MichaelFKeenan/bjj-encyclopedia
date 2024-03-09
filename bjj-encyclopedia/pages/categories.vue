@@ -29,14 +29,16 @@
 const newCategoryName = ref("");
 const categories = ref([]);
 
+const apiUrl = process.env.API_ENDPOINT || "http://localhost:3001";
+
 const getCategories = async () => {
-  const response = await fetch("http://localhost:3001/categories");
+  const response = await fetch(`${apiUrl}/categories`);
   categories.value = await response.json();
 };
 onMounted(getCategories);
 
 const addCategory = async () => {
-  const response = await fetch("http://localhost:3001/categories", {
+  const response = await fetch(`${apiUrl}/categories`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

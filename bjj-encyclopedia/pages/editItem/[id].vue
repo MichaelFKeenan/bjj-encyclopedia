@@ -54,21 +54,23 @@ const resultCategoryId = ref("");
 const coaches = ref([]);
 const categories = ref([]);
 
+const apiUrl = process.env.API_ENDPOINT || "http://localhost:3001";
+
 const getItem = async () => {
   console.log("route.params", route.params);
   const response = await fetch(
-    `http://localhost:3001/results/${route.params.id}`
+    `${apiUrl}/results/${route.params.id}`
   );
   result.value = await response.json();
 };
 
 const getCoaches = async () => {
-  const response = await fetch("http://localhost:3001/coaches");
+  const response = await fetch(`${apiUrl}/coaches`);
   coaches.value = await response.json();
 };
 
 const getCategories = async () => {
-  const response = await fetch("http://localhost:3001/categories");
+  const response = await fetch(`${apiUrl}/categories`);
   categories.value = await response.json();
 };
 
@@ -93,7 +95,7 @@ const save = async () => {
     CategoryId: resultCategoryId.value,
   };
 
-  const response = await fetch(`http://localhost:3001/results/${result.value.id}`, {
+  const response = await fetch(`${apiUrl}/results/${result.value.id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

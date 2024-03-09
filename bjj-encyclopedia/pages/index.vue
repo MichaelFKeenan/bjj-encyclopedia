@@ -22,19 +22,21 @@ const results = ref([]);
 const categories = ref([]);
 const coaches = ref([]);
 
+const apiUrl = process.env.API_ENDPOINT || "http://localhost:3001";
+
 //move all this stuff into a state store, expose via getters, populate store in middleware (before page load)
 const getResults = async () => {
-  const response = await fetch("http://localhost:3001/results");
+  const response = await fetch(`${apiUrl}/results`);
   results.value = await response.json();
 };
 
 const getCategories = async () => {
-  const response = await fetch("http://localhost:3001/categories");
+  const response = await fetch(`${apiUrl}/categories`);
   categories.value = await response.json();
 };
 
 const getCoaches = async () => {
-  const response = await fetch("http://localhost:3001/coaches");
+  const response = await fetch(`${apiUrl}/coaches`);
   coaches.value = await response.json();
 };
 

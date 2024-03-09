@@ -29,14 +29,16 @@
 const newCoachName = ref("");
 const coaches = ref([]);
 
+const apiUrl = process.env.API_ENDPOINT || "http://localhost:3001";
+
 const getCoaches = async () => {
-  const response = await fetch("http://localhost:3001/coaches");
+  const response = await fetch(`${apiUrl}/coaches`);
   coaches.value = await response.json();
 };
 onMounted(getCoaches);
 
 const addCoach = async () => {
-  const response = await fetch("http://localhost:3001/coaches", {
+  const response = await fetch(`${apiUrl}/coaches`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

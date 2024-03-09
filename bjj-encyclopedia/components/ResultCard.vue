@@ -24,8 +24,10 @@ const showDetails = (show) => {
   isShowDetails.value = show;
 };
 
+const apiUrl = process.env.API_ENDPOINT || "http://localhost:3001";
+
 const deleteResult = async (resultId) => {
-  await fetch(`http://localhost:3001/results/${resultId}`, {
+  await fetch(`${apiUrl}/results/${resultId}`, {
     method: "DELETE",
   });
   results.value = results.value.filter((r) => r.id !== resultId);
