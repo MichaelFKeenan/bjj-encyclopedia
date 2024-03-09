@@ -10,7 +10,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: ["https://mfk-dev.com", "http://localhost:3000"],
+    origin: ["https://www.mfk-dev.com", "http://localhost:3000"],
   })
 );
 
