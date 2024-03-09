@@ -27,7 +27,7 @@ const showDetails = (show) => {
 const apiUrl = process.env.API_ENDPOINT || "https://main.d2vy4qzsof71mx.amplifyapp.com";
 
 const deleteResult = async (resultId) => {
-  await fetch(`${apiUrl/results/${resultId}`, {
+  await fetch(`${apiUrl}/results/${resultId}`, {
     method: "DELETE",
   });
   results.value = results.value.filter((r) => r.id !== resultId);
