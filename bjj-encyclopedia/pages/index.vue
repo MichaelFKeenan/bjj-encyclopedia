@@ -22,7 +22,7 @@ const results = ref([]);
 const categories = ref([]);
 const coaches = ref([]);
 
-const apiUrl = process.env.API_ENDPOINT || "http://localhost:3001";
+const apiUrl = process.env.API_ENDPOINT || "https://main.d2vy4qzsof71mx.amplifyapp.com";
 
 //move all this stuff into a state store, expose via getters, populate store in middleware (before page load)
 const getResults = async () => {

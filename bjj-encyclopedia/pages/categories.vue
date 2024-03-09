@@ -29,7 +29,7 @@
 const newCategoryName = ref("");
 const categories = ref([]);
 
-const apiUrl = process.env.API_ENDPOINT || "http://localhost:3001";
+const apiUrl = process.env.API_ENDPOINT || "https://main.d2vy4qzsof71mx.amplifyapp.com";
 
 const getCategories = async () => {
   const response = await fetch(`${apiUrl}/categories`);
