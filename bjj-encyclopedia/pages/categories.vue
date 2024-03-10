@@ -16,7 +16,7 @@
       </div>
       <button
         @click="
-          addCategory({ name: newCategoryName })
+          add({ name: newCategoryName })
         "
       >
         Add
@@ -26,27 +26,19 @@
 </template>
 
 <script setup>
+const { getCategories, addCategory, } = useApi();
+
 const newCategoryName = ref("");
 const categories = ref([]);
 
-const apiUrl = process.env.API_ENDPOINT || "https://main.d2vy4qzsof71mx.amplifyapp.com";
-
-const getCategories = async () => {
-  const response = await fetch(`${apiUrl}/categories`);
+const getAll = async () => {
+  const response = await getCategories();
   categories.value = await response.json();
 };
-onMounted(getCategories);
+onMounted(getAll);
 
-const addCategory = async () => {
-  const response = await fetch(`${apiUrl}/categories`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      name: newCategoryName.value
-    }),
-  });
+const add = async () => {
+  const response = await addCategory(newCategoryName.value);
   const result = await response.json();
   categories.value.push(result);
   newCategoryName.value = "";

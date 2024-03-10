@@ -18,31 +18,31 @@
 </template>
 
 <script setup>
+const { getResults, getCategories, getCoaches } = useApi();
+
 const results = ref([]);
 const categories = ref([]);
 const coaches = ref([]);
 
-const apiUrl = process.env.API_ENDPOINT || "https://main.d2vy4qzsof71mx.amplifyapp.com";
-
 //move all this stuff into a state store, expose via getters, populate store in middleware (before page load)
-const getResults = async () => {
-  const response = await fetch(`${apiUrl}/results`);
+const getAllResults = async () => {
+  const response = await getResults();
   results.value = await response.json();
 };
 
-const getCategories = async () => {
-  const response = await fetch(`${apiUrl}/categories`);
+const getAllCategories = async () => {
+  const response = await getCategories();
   categories.value = await response.json();
 };
 
-const getCoaches = async () => {
-  const response = await fetch(`${apiUrl}/coaches`);
+const getAllCoaches = async () => {
+  const response = await getCoaches();
   coaches.value = await response.json();
 };
 
-onMounted(getResults);
-onMounted(getCoaches);
-onMounted(getCategories);
+onMounted(getAllResults);
+onMounted(getAllCoaches);
+onMounted(getAllCategories);
 
 //move all this filtering onto state store
 const filterCoach = (id) => {

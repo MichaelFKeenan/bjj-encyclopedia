@@ -3,7 +3,7 @@
     <div>
       {{ result.name }} - {{ result.Coach?.name }} - {{ result.Category?.name }}
       <NuxtLink :to="`/editItem/${result.id}`"><button>Edit</button></NuxtLink>
-      <button @click="deleteResult(result.id)">Delete</button>
+      <button @click="deleteItem(result.id)">Delete</button>
       <button @click="showDetails(true)" v-if="!isShowDetails">open</button>
       <button @click="showDetails(false)" v-if="isShowDetails">hide</button>
     </div>
@@ -14,6 +14,8 @@
 </template>
 
 <script setup>
+const { deleteResult } = useApi();
+
 defineProps({
   result: Object
 })
@@ -24,12 +26,8 @@ const showDetails = (show) => {
   isShowDetails.value = show;
 };
 
-const apiUrl = process.env.API_ENDPOINT || "https://main.d2vy4qzsof71mx.amplifyapp.com";
-
-const deleteResult = async (resultId) => {
-  await fetch(`${apiUrl}/results/${resultId}`, {
-    method: "DELETE",
-  });
+const deleteItem = async (resultId) => {
+  await deleteResult(resultId);
   results.value = results.value.filter((r) => r.id !== resultId);
 };
 </script>

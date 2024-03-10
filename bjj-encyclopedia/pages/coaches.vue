@@ -16,7 +16,7 @@
       </div>
       <button
         @click="
-          addCoach({ name: newCoachName })
+          add({ name: newCoachName })
         "
       >
         Add
@@ -26,27 +26,19 @@
 </template>
 
 <script setup>
+const { getCoaches, addCoach } = useApi();
+
 const newCoachName = ref("");
 const coaches = ref([]);
 
-const apiUrl = process.env.API_ENDPOINT || "https://main.d2vy4qzsof71mx.amplifyapp.com";
-
-const getCoaches = async () => {
-  const response = await fetch(`${apiUrl}/coaches`);
+const getAll = async () => {
+  const response = await getCoaches();
   coaches.value = await response.json();
 };
-onMounted(getCoaches);
+onMounted(getAll);
 
-const addCoach = async () => {
-  const response = await fetch(`${apiUrl}/coaches`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      name: newCoachName.value
-    }),
-  });
+const add = async () => {
+  const response = await addCoach(newCoachName.value);
   const result = await response.json();
   coaches.value.push(result);
   newCoachName.value = "";

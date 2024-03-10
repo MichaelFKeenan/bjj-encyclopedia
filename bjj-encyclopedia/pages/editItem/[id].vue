@@ -43,6 +43,8 @@
 </template>
 
 <script setup>
+const { getCategories, getCoaches, getResult } = useApi();
+
 const result = ref({});
 
 const route = useRoute();
@@ -54,23 +56,18 @@ const resultCategoryId = ref("");
 const coaches = ref([]);
 const categories = ref([]);
 
-const apiUrl = process.env.API_ENDPOINT || "https://main.d2vy4qzsof71mx.amplifyapp.com";
-
 const getItem = async () => {
-  console.log("route.params", route.params);
-  const response = await fetch(
-    `${apiUrl}/results/${route.params.id}`
-  );
+  const response = await getResult(route.params.id);
   result.value = await response.json();
 };
 
-const getCoaches = async () => {
-  const response = await fetch(`${apiUrl}/coaches`);
+const getAllCoaches = async () => {
+  const response = await getCoaches();
   coaches.value = await response.json();
 };
 
-const getCategories = async () => {
-  const response = await fetch(`${apiUrl}/categories`);
+const getAllCategories = async () => {
+  const response = await getCategories();
   categories.value = await response.json();
 };
 
@@ -82,8 +79,8 @@ onMounted(async () => {
   resultCoachId.value = result.value.CoachId;
   resultCategoryId.value = result.value.CategoryId;
 
-  await getCoaches();
-  await getCategories();
+  await getAllCoaches();
+  await getAllCategories();
 });
 
 const save = async () => {
