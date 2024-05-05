@@ -20,3 +20,7 @@ add some kind of proficiency chart/ranking
 
 note things that have worked or not worked when rolling
 - this will allow to figure out A game, and what needs to be worked on
+
+## storybook troubleshooting
+
+https://github.com/hirotaka/storybook-addon-nuxt/issues/24

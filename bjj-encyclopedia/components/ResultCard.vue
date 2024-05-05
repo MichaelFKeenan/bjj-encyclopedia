@@ -13,12 +13,12 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import type { Props } from './ResultCard';
+
 const { deleteResult } = useApi();
 
-defineProps({
-  result: Object
-})
+withDefaults(defineProps<Props>(), {});
 
 const isShowDetails = ref(false);
 
